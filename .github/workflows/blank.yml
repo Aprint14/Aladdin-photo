@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Фотосалон Аладдин — Энгельс</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --blue: #0b4ea2;
+      --light-blue: #e6f0ff;
+      --white: #ffffff;
+      --text: #111111;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+    header {
+      background: var(--blue);
+      color: var(--white);
+      padding: 16px;
+    }
+    header .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    header .phone {
+      font-size: 14px;
+      text-align: right;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    .hero {
+      padding: 24px 20px;
+      background: var(--light-blue);
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+    .hero h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+      color: var(--blue);
+    }
+    .hero p {
+      margin-bottom: 16px;
+    }
+    .primary-btn {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 24px 0 12px;
+      color: var(--blue);
+    }
+    .services-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 24px;
+    }
+    .services-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid #eeeeee;
+      font-size: 15px;
+    }
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .contacts-card {
+      border: 1px solid #dde5f5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #f8fbff;
+      font-size: 14px;
+    }
+    .contacts-card b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--blue);
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .chip {
+      border-radius: 999px;
+      border: 1px solid var(--blue);
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--blue);
+      background: var(--white);
+    }
+    .chip.primary {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .map-block {
+      margin-top: 20px;
+    }
+    .map-block iframe {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      min-height: 260px;
+    }
+    footer {
+      background: var(--blue);
+      color: var(--white);
+      padding: 16px;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    @media (max-width: 600px) {
+      header .wrap { flex-direction: column; align-items: flex-start; }
+      header .phone { text-align: left; }
+      .hero { padding: 20px 16px; }
+      .hero h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Фотосалон «Аладдин»</h1>
+    <div class="phone">
+      <div>Энгельс, ул. Тельмана, д. 5</div>
+      <div>+7 917 217‑52‑94</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Обложка -->
+  <section class="hero">
+    <h2>Фото на документы и печать фотографий в Энгельсе</h2>
+    <p>Сделаем аккуратные фото на документы, распечатаем ваши снимки и поможем с обработкой фотографий прямо в центре города.</p>
+    <a class="primary-btn" href="https://wa.me/79172175294" target="_blank" rel="noopener">
+      Написать в WhatsApp
+    </a>
+  </section>
+
+  <!-- Услуги -->
+  <section>
+    <h3 class="section-title">Услуги фотосалона</h3>
+    <ul class="services-list">
+      <li>Фото на документы: паспорт, виза, водительское удостоверение, пропуск.</li>
+      <li>Срочное фото на документы за несколько минут.</li>
+      <li>Печать фотографий с телефона, флешки и других носителей.</li>
+      <li>Обработка, ретушь и восстановление старых фотографий.</li>
+      <li>Подготовка фотографий для анкет, резюме и онлайн‑заявок.</li>
+    </ul>
+  </section>
+
+  <!-- Контакты -->
+  <section>
+    <h3 class="section-title">Контакты</h3>
+    <div class="contacts-grid">
+      <div class="contacts-card">
+        <b>Телефон</b>
+        <div>+7 917 217‑52‑94</div>
+        <div>8 (8453) 56‑69‑33</div>
+      </div>
+      <div class="contacts-card">
+        <b>Мессенджеры и соцсети</b>
+        <div class="chip-row">
+          <a class="chip primary" href="https://wa.me/79172175294" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="chip" href="https://t.me/aprint14photo" target="_blank" rel="noopener">Telegram</a>
+          <a class="chip" href="https://vk.com/aprint14" target="_blank" rel="noopener">VK</a>
+          <span class="chip">MAX: +7 917 217‑52‑94</span>
+        </div>
+      </div>
+      <div class="contacts-card">
+        <b>E‑mail</b>
+        <a href="mailto:aprint14@mail.ru">aprint14@mail.ru</a>
+      </div>
+      <div class="contacts-card">
+        <b>Адрес</b>
+        <div>г. Энгельс, ул. Тельмана, д. 5</div>
+      </div>
+    </div>
+
+    <!-- Карту Яндекс/2ГИС лучше заменить вашим кодом -->
+    <div class="map-block">
+      <!-- Вставьте сюда iframe от Яндекс.Карт или 2ГИС -->
+      <!-- Пример: Яндекс.Карты (замените src на ваш) -->
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&amp;source=constructor"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Фотосалон «Аладдин», г. Энгельс, ул. Тельмана, д. 5 • +7 917 217‑52‑94
+</footer>
+</body>
+</html>
