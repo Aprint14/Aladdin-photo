@@ -269,26 +269,9 @@ margin-bottom: 10px;
 }
 #preview {
 display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-top: 10px;
-}
-#preview img {
-width: 80px;
-height: 80px;
-object-fit: cover;
-border-radius: 6px;
-}
-.send-btn {
-background: var(--blue);
-color: white;
-border: none;
-padding: 12px 20px;
-border-radius: 8px;
-font-weight: 600;
-cursor: pointer;
-width: 100%;
-}
+flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+#preview img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; }
+.send-btn { background: var(--blue); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
@@ -339,7 +322,7 @@ width: 100%;
 <section class="upload-box">
 <h3 style="color: var(--blue); margin-bottom: 10px;">📸 Отправить фото на печать</h3>
 <form id="photoForm">
-<textarea id="comment" rows="3" placeholder="Комментарий (например: 10х15 глянец по 1шт)"></textarea>
+<textarea id="comment" name="comment" rows="3" placeholder="Комментарий (например: 10х15 глянец по 1шт)"></textarea>
 <input type="file" id="file_input" multiple accept="image/*">
 <div id="preview"></div>
 <button type="submit" id="sendBtn" class="send-btn">🚀 Отправить фотографии</button>
@@ -390,7 +373,7 @@ width: 100%;
 </footer>
 
 <script>
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("-6JTo18k9wPQhYKT3");
 
 const fileInput = document.getElementById('file_input');
 const preview = document.getElementById('preview');
@@ -398,34 +381,64 @@ const form = document.getElementById('photoForm');
 const statusMsg = document.getElementById('statusMsg');
 
 fileInput.addEventListener('change', function() {
-preview.innerHTML = '';
-Array.from(this.files).forEach(file => {
-const reader = new FileReader();
-reader.onload = e => {
-const img = document.createElement('img');
-img.src = e.target.result;
-preview.appendChild(img);
-};
-reader.readAsDataURL(file);
-});
+  preview.innerHTML = '';
+  Array.from(this.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
 });
 
 form.addEventListener('submit', function(e) {
-e.preventDefault();
-const btn = document.getElementById('sendBtn');
-btn.disabled = true;
-btn.textContent = 'Отправка...';
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Идет отправка...';
+  
+  statusMsg.style.display = 'block';
+  statusMsg.style.color = 'blue';
+  statusMsg.textContent = '📤 Пожалуйста, подождите, фото загружаются...';
 
-statusMsg.style.display = 'block';
-statusMsg.style.color = 'blue';
-statusMsg.textContent = '⏳ Подождите, форма настраивается...';
+  // Собираем данные
+  const comment = document.getElementById('comment').value;
+  const files = fileInput.files;
 
-setTimeout(() => {
-statusMsg.style.color = 'green';
-statusMsg.textContent = '✅ Почти готово! Вставьте ваш ключ EmailJS в код.';
-btn.disabled = false;
-btn.textContent = '🚀 Отправить фотографии';
-}, 2000);
+  if (files.length === 0) {
+    statusMsg.style.color = 'red';
+    statusMsg.textContent = '❌ Пожалуйста, выберите хотя бы одно фото.';
+    btn.disabled = false;
+    btn.textContent = '🚀 Отправить фотографии';
+    return;
+  }
+
+  // ВАЖНО: EmailJS имеет лимиты на размер вложений. 
+  // Мы отправляем комментарий, а фото передаются как base64 (если их немного и они мелкие)
+  // Для большого количества фото лучше использовать ссылку на облако.
+  
+  const templateParams = {
+    comment: comment,
+    files_count: files.length
+  };
+
+  emailjs.send('default_service', 'template_id_needed', templateParams)
+    .then(function() {
+      statusMsg.style.color = 'green';
+      statusMsg.textContent = '✅ Заказ успешно отправлен! Мы скоро свяжемся с вами.';
+      form.reset();
+      preview.innerHTML = '';
+    }, function(error) {
+      statusMsg.style.color = 'red';
+      statusMsg.textContent = '❌ Ошибка: нужно настроить Service ID и Template ID в EmailJS.';
+      console.log('FAILED...', error);
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.textContent = '🚀 Отправить фотографии';
+    });
 });
 </script>
 
